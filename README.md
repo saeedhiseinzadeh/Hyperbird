@@ -19,6 +19,10 @@ The script requires the following Python packages:
 - Pillow
 - Segment Anything Model (SAM)
 
+The script needs following SAM check point:
+- The check point that been use dhere is "sam_vit_h_4b8939.pth" which should be in the same fodler as the *.py.
+- Also it uses CPU. If you have GPU, then change the CPU to CUDA.
+
 ## Installation
 
 Install the required packages using pip:
@@ -36,10 +40,10 @@ pip install opencv-python spectral plantcv torch matplotlib pillow segment-anyth
 
 2. **Run the script**:
    - The script takes the following arguments:
-     - `white_ref`: Path to the white reference image.
-     - `black_ref`: Path to the black reference image.
-     - `num_objects`: Number of objects to detect in the image.
-     - `percentage`: Percentage to shrink the mask.
+     - `white_ref`: Path to the white reference image in *raw format.
+     - `black_ref`: Path to the black reference image in *raw format.
+     - `num_objects`: Number of objects to detect in the image, should be 1 or <.
+     - `percentage`: Percentage to shrink the mask. The defult is 2. 
      - `num_processes`: Number of processes to use for multiprocessing (optional, defaults to the number of CPU cores).
 
    ```sh
@@ -79,6 +83,7 @@ pip install opencv-python spectral plantcv torch matplotlib pillow segment-anyth
 
 - **SAM Model Loading**: The SAM model is loaded, and the image is segmented based on the detected centers.
 - **Best Mask Selection**: The mask with the highest score is selected and shrunk by the specified percentage.
+- **The check point that been use dhere is "sam_vit_h_4b8939.pth" which should be in the same fodler as the *.py.
 
 ### 6. Data Calculation and Saving
 
@@ -92,8 +97,8 @@ pip install opencv-python spectral plantcv torch matplotlib pillow segment-anyth
 ## Example Output
 
 The script generates the following outputs:
-- **Segmented Images**: Saved in the `disk_images` directory.
-- **Marked Images**: Saved in the `centers` directory.
+- **Segmented Images**: Saved in the `disk_images` directory. This folder contain the masks in PNG.
+- **Marked Images**: Saved in the `centers` directory. There should be small filled circle which is the center of the object with color of intrest. 
 - **CSV File**: Contains the average spectral data for each processed image.
 
 ## Error Handling
@@ -110,4 +115,4 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ---
 
-Feel free to reach out with any questions or issues you encounter while using this script. Happy processing!
+Feel free to reach out with any questions or issues you encounter while using this script (sh2387@cornell.edu). Happy processing!
